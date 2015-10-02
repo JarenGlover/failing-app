@@ -1,10 +1,12 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+USER_NAME='web'
+
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
-# configures the configuration version (we support older styles for
-# backwards compatibility). Please don't change it unless you know what
-# you're doing.
+# Configures the configuration version (we support older styles for
+# Backwards compatibility). Please don't change it unless you know what
+# You're doing.
 Vagrant.configure(2) do |config|
   # The most common configuration options are documented and commented below.
   # For a complete reference, please see the online documentation at
@@ -18,7 +20,7 @@ Vagrant.configure(2) do |config|
   config.ssh.forward_agent = true
 
   # config.ssh.private_key_path = ['devops/sample_rsa']
-  # config.ssh.username = 'web'
+   config.ssh.username = "#{USER_NAME}"
 
   # user configurations
   config.vm.provision "shell", path: "vagrant/user-config.sh"
@@ -26,9 +28,12 @@ Vagrant.configure(2) do |config|
   config.vm.provision "shell", path: "vagrant/provision.sh"
   # app specfic configurations
   config.vm.provision "shell",
-    inline: "sudo -Hiu shyp /bin/bash /vagrant/vagrant/failing-app.sh"
+    inline: "sudo -Hiu #{USER_NAME} /bin/bash /vagrant/vagrant/failing-app.sh"
 
-  # accessing "localhost:8080" will access port 80 on the guest machine.
+# accessing "localhost:8080" will access port 80 on the guest machine.
+# accessing "localhost:8732" will access port 8732 on the guest machine.
+# accessing "localhost:8181" will access port 443 on the guest machine.
+
  config.vm.network "forwarded_port", guest: 80, host: 8080
  config.vm.network "forwarded_port", guest: 8732, host: 8732
  config.vm.network "forwarded_port", guest: 443, host: 8181
