@@ -5,6 +5,9 @@
 # Date 9/28/15
 
 # user name to user for configuration
+# NOTE: I should prob set my app_user_name to the bash profile
+# NOTE cont: this way I can leverage it instead of haven't to name it
+
 USER_NAME='web'
 # nozero exit from any command we want to ERROR
 set -ex
