@@ -20,10 +20,10 @@ err_report() {
 trap 'err_report $LINENO' ERR
 # create user and sudo acces
 useradd -s /bin/bash -m -g syslog -d /home/$USER_NAME $USER_NAME
-echo "$USER_NAME ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/vagrant
+echo "$USER_NAME ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 #ssh setup
-sudo su $USER_NAME -l
+
 mkdir /home/$USER_NAME/.ssh
 cat /vagrant/devops/sample_rsa.pub >> /home/$USER_NAME/.ssh/authorized_keys
 cp /vagrant/devops/sample_rsa.pub  /home/$USER_NAME/.ssh/.
